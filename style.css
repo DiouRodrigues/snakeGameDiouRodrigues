@@ -54,6 +54,10 @@ body{
 .play-board .snake{
     background: var(--snake);
     border: 1px solid var(--board);
+    border-radius: 25% 0 25% 0;
+}
+.play-board .snake:nth-child(1){
+    background: var(--board);
 }
 .controls{
     display: none;

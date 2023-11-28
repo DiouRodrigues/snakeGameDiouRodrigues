@@ -11,13 +11,24 @@ let gameOver = false;
 let setIntervalId;
 let score  = 0;
 
+const som_HIT = new Audio();
+const som_PULO = new Audio();
+const som_PONTO = new Audio();
+const som_CAIU = new Audio();
+const som_FUNDO = new Audio();
+som_HIT.src = './efeitos/som_fundo.mp3';
+som_HIT.src = './efeitos/hit.wav';
+som_PULO.src = './efeitos/pulo.wav';
+som_PONTO.src = './efeitos/ponto.wav';
+som_CAIU.src = './efeitos/som_perdeu.mp3';
+
 let highScore = localStorage.getItem("high-score") || 0;
 highScoreElement.innerText = `HIGH SCORE: ${highScore}`;
 
 
 const handleGameOver = () =>{
     clearInterval(setIntervalId)
-    alert( "voce perdeu pressione ok para jogar novamente")
+    alert( "voce perdeu pressione ok para jogar novamente " )
     location.reload()
 }
 
@@ -49,9 +60,10 @@ controls.forEach(key =>{
 })
 
 const initGame = ()=>{
+    som_FUNDO.play()
     if(gameOver){
-        
         return handleGameOver();
+        
     }
     let htmlMarkUp = `<div class="food" style="grid-area:${foodY} / ${foodX} "></div>`;
     if(snakeX === foodX && snakeY === foodY){
@@ -62,7 +74,7 @@ const initGame = ()=>{
         localStorage.setItem("high-score", highScore)
         scoreElement.innerText = `SCORE: ${score}`
         highScoreElement.innerText = `HIGH SCORE: ${highScore}`
-        
+        som_PONTO.play()
     }
     for(let i = snakeBody.length - 1; i > 0; i--){
         snakeBody[i] = snakeBody[i - 1];
@@ -73,6 +85,7 @@ const initGame = ()=>{
     snakeY += velocityY;
     if(snakeX <= 0 || snakeX > 30 || snakeY <= 0 || snakeY > 30 ){
         gameOver = true
+        som_HIT.play()
     }
 
     
@@ -80,6 +93,7 @@ const initGame = ()=>{
         htmlMarkUp += `<div class="snake" style="grid-area:${snakeBody[i][1]} / ${snakeBody[i][0]} "></div>`;
         if(i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]){
             gameOver =true
+            som_CAIU.play()
         }
     };
     playBoard.innerHTML= htmlMarkUp;
