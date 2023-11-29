@@ -54,13 +54,14 @@ const changeDirection = (e) =>{
         velocityY = 0;   
     }
     initGame()
+    
 }
 controls.forEach(key =>{
     key.addEventListener("click", () => changeDirection({key: key.dataset.key}))
 })
 
 const initGame = ()=>{
-    som_FUNDO.play()
+    
     if(gameOver){
         return handleGameOver();
         

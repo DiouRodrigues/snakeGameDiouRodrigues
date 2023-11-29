@@ -49,14 +49,17 @@ body{
 }
 .play-board .food{
     background-color: var(--food);
-    border-radius: 25%;
+    border-radius: 50px;
+    
 }
 .play-board .snake{
     background: var(--snake);
     border: 1px solid var(--board);
     border-radius: 25% 0 25% 0;
+    width: 100%;
+    height: 100%;
 }
-.play-board .snake:nth-child(1){
+.play-board .snake:first-child{
     background: var(--board);
 }
 .controls{
